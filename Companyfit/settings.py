@@ -120,8 +120,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = ( 
+    "C:/Users/aryan000/Desktop/Companyfit/static",
     "C:/Users/nidhi/Desktop/Companyfit/static",
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
+
 ) 
 

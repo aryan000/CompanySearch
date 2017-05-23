@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request) :
-	return HttpResponse("hello")
+    return render(request, 'index.html')
 
 def test(request) :
 	Context = {'polarity':'positive','name':'Nidhi','type':'string'}
@@ -11,6 +11,20 @@ def test(request) :
 
 # def home(request) :
 # 	return render(request, 'home.html')
+
+
+def main(request):
+    if 'company_name' in request.GET : 
+        company_name = request.GET['company_name']
+        print( " hello getting is : " +  company_name )
+        return render(request , 'main.html',{'name' : company_name})
+
+
+
+
+    return render(request,'navbar.html')
+
+     
 
 def company_search(request) :
     error = False
