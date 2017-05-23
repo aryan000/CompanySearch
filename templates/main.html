@@ -2,5 +2,46 @@
 {% load i18n %} 
 
 
-<h1 > hi {{ name }} </h1>
 
+
+<h1 > hi {{ name }} </h1>
+<h1> Industry name : {{ industryName }} </h1>
+<h1> Rating :  {{ rating }} </h1>
+<h1> Overall Rating : {{ overallRating }} </h1>
+<h1> Description : {{ description }}</h1>
+<h1> Website : <a href = "{{ website }}" > {{ website }} </a> </h1>
+<!-- <h1> Reviews : {{ sentences.1 }} </h1> -->
+
+
+<ul> 
+
+{% for key , value in sentences.items %}
+  <div>
+     <ol> 
+       <label> Review {{ key }} </label> <br>
+       {% for key2 , value2 in value.items %} 
+
+          {% if key2 != 'features' %} 
+            <li>  {{ key2 }} : {{ value2 }} </li>
+          {% else %}
+             <ol> 
+              {{ key2 }}
+               {%  for key3 , value3 in value2.items %}
+               	  <li> {{ key3 }} : {{ value3 }} </li>
+
+               {% endfor %}
+
+             </ol>
+             {% endif %}
+
+        {% endfor %}
+
+
+     </ol>
+
+  </div>
+{% endfor %}
+
+
+
+</ul>

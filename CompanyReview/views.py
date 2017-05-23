@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
+import os
 
 # Create your views here.
 def index(request) :
@@ -17,7 +19,11 @@ def main(request):
     if 'company_name' in request.GET : 
         company_name = request.GET['company_name']
         print( " hello getting is : " +  company_name )
-        return render(request , 'main.html',{'name' : company_name})
+        print (os.path.join(os.getcwd()))
+        with open('company_dict.json' , 'r') as f:
+            data = json.load(f)
+
+        return render(request , 'main.html',data)
 
 
 
