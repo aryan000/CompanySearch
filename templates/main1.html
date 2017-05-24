@@ -1,5 +1,6 @@
 {% load i18n %} 
 {% include 'header.html' %}
+{% load app_filter %}
 
 </div>
     <!-- Main Content -->
@@ -19,7 +20,7 @@
                 </tr>
               </table>
 
-            <label> Description : {{ description }} </label> <br> 
+            <label> Description : {{ description|caps_filter }} </label> <br> 
             <label>  Website : <a href = "http://{{ website }}" > {{ website }} </a> </label>
            
             </div>
@@ -33,7 +34,7 @@
                             {{ value.sentence_text}}
                         </h2>
                         <h3 class="post-subtitle">
-                           Sentiment :  {{value.sentiment}}
+                           Sentiment :  {{ value.sentiment|sentiment_filter  }}
                         </h3> 
                         <h3 class="post-subtitle">
                            Features : {{ value.features.no_of_features }}
@@ -42,11 +43,11 @@
                           
                           {%  for feature_name , feature_value in value.features.items %}
                            {%  if feature_name != 'no_of_features' %}
-                              <li> {{ feature_name }} : {{ feature_value.sentiment }} 
+                              <li> {{ feature_name|caps_filter }} : {{ feature_value.sentiment|sentiment_filter }} 
                                  {% for opinion_word , opinion_word_sentiment in feature_value.items %}
                                  <ul> 
                                     {% if opinion_word != 'sentiment' %}
-                                      <li> {{ opinion_word }} : {{ opinion_word_sentiment }} </li>
+                                      <li> {{ opinion_word|caps_filter }} : {{ opinion_word_sentiment|sentiment_filter }} </li>
                                     {% endif %}
                                  </ul>
                                
@@ -58,7 +59,7 @@
 
                         </ol>
                     </a>
-                    <p class="post-meta">Posted  on {{ value.time }}</p>
+                    <p class="post-meta">Posted  on {{ value.time|date_filter }}</p>
                 </div>
                 <hr>
              {% endfor%}   
