@@ -20,14 +20,9 @@ def main(request):
         company_name = request.GET['company_name']
         print( " hello getting is : " +  company_name )
         print (os.path.join(os.getcwd()))
-        with open('company_dict.json' , 'r') as f:
+        with open('company_dict1.json' , 'r') as f:
             data = json.load(f)
-
         return render(request , 'main1.html',data)
-
-
-
-
     return render(request,'navbar.html')
 
      
@@ -48,3 +43,14 @@ def company_search(request) :
 	#     message = 'You submitted an empty form.'
 	# return HttpResponse(message)
 #return render(request, 'comapany_search.html')
+
+
+def feature(request,company_name):
+
+    print ("\n\n\n\ncompany name is : " + company_name)
+    # company_name = request.GET['company_name']
+    with open('company_dict1.json' , 'r') as f:
+        data = json.load(f)
+    return render(request , 'feature.html',data)
+
+    
