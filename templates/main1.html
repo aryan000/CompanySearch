@@ -13,6 +13,8 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme CSS -->
     <link href="/static/css/clean-blog.min.css" rel="stylesheet">
+
+   
 </head>
 
 <body>
@@ -67,8 +69,23 @@
         </div>
     </header>
 
+
+
+</div>
     <!-- Main Content -->
     <div class="container">
+        <div class = "row" > 
+            <label> Industry Name : {{ industryName }} </label>
+            <table> 
+        <tr> 
+            <td> <label> Rating : </label>  </td>
+            <td>  <input id="input-id" name="input-name" type="number" class="rating" clearButton = "1"  showClear = "false"  clearButtonTitle = "click me"  min=0 max=5 step=0.5 data-size="xs" rtl = "true" data-rtl="false" clear = "false"  showCaption = "false" value = '{{ no_of_sentences }}'  readOnly = "true"  displayOnly = "true">
+            </td>
+        </tr>
+    </table>
+
+            </div>
+
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
@@ -165,19 +182,7 @@
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
-
-    <!-- Theme JavaScript -->
-    <script src="/static/js/clean-blog.min.js"></script>
-
+    
 </body>
 
 </html>
