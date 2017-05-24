@@ -1,5 +1,7 @@
 {% load i18n %} 
 {% include 'header.html' %}
+{% load app_filter %}
+
 
 </div>
     <!-- Main Content -->
@@ -26,12 +28,14 @@
 
         <div class="row">
             <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0">
+
             {% for key , value in feature_json.items %}
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
                             Feature name : {{ key }}
                         </h2>
+                    </a>
                         <h3 class="post-subtitle">
                            Number of Reviews :  {{value.no_of_sentences}}
                         </h3> 
@@ -41,12 +45,13 @@
                         
                         <ul>
                         {% for id in value.sentence_ids %}
-                         {% with id as iid %}
-                            <li> {{iid}} with {{ sentences.1 }} </li> 
-                         {% endwith %}
+                        <!-- <li> id is :  {{ id }} </li> -->
+                        <!-- <li> testing : {{sentences|get_from_dict:id}} </li> -->
+                        {% with sentences|get_from_dict:id as dict %}
 
-
+                        <li>  Review  {{ id }}  :   {{dict.sentence_text }} </li>
                         </ul>
+                        {% endwith %}
                         {% endfor %}
 
                     <p class="post-meta">Posted  on {{ value.time }}</p>
