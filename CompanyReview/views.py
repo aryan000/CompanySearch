@@ -23,7 +23,7 @@ def main(request):
         with open('company_dict.json' , 'r') as f:
             data = json.load(f)
 
-        return render(request , 'main.html',data)
+        return render(request , 'main1.html',data)
 
 
 
