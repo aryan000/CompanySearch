@@ -1,38 +1,21 @@
 {% load i18n %} 
 {% include 'header.html' %}
 {% load app_filter %}
+{% load staticfiles %}
 
-</div>
-    <!-- Main Content -->
-    <div class="container">
-        <div class = "row" > 
-            <label> Industry Name : {{ industryName|remove_and }} </label> <br>
-            <label> Sector Name : {{ sectorName }} </label> <br>
-            <label> Reviews : Total {{ no_of_sentences }} Reviews</label>  <br>
-             <table> 
-                <tr> 
-                    <td> <label> Rating : </label>  </td>
-                     
-                    <td>  <input id="input-id" name="input-name" type="number" class="rating" clearButton = "1"  showClear = "false"  clearButtonTitle = "click me"  min=0 max=5 step=0.5 data-size="xs" rtl = "true" data-rtl="false"   
-                    value = '{{ overallRating }}'   readOnly = "false"  displayOnly = "false">
-                    
-                    </td>
-                </tr>
-              </table>
 
-            <label> Description : {{ description|caps_filter }} </label> <br> 
-            <label>  Website : <a href = "http://{{ website }}" > {{ website }} </a> </label>
-           
-            </div>
+<div class = "container">
 
-       <!-- <div class="row">
+ <div class="row">
             <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0">
             {% for key , value in sentences.items %}
                 <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
+                    	<div class="panel panel-primary">
+                    	      <div class="panel-heading">{{ value.sentence_text|remove_quotes}}</div>
+                   	    </div>
+                        <!-- <h2 class="post-title" class="panel panel-primary">
                             {{ value.sentence_text|remove_quotes}}
-                        </h2>
+                        </h2> -->
                         <h3 class="post-subtitle">
                            Sentiment :  {{ value.sentiment|sentiment_filter  }}
                         </h3> 
@@ -65,17 +48,16 @@
              {% endfor%}   
                 
                 
-               
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul>
             </div>
-        </div>  -->
-    </div>
+        </div>
+</div>
 
-    <hr>
 
-    <!-- Footer -->
+  <!-- Footer -->
     {% include 'footer.html' %}
-
-    
-</body>
-
-</html>

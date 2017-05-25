@@ -1,6 +1,7 @@
 {% load i18n %} 
 {% include 'header.html' %}
 {% load app_filter %}
+{% load staticfiles %}
 
 
 </div>
@@ -31,11 +32,11 @@
 
             {% for key , value in feature_json.items %}
                 <div class="post-preview">
-                    <a href="post.html">
+                   
                         <h2 class="post-title">
                             Feature name : {{ key }}
                         </h2>
-                    </a>
+                   
                         <h3 class="post-subtitle">
                            Number of Reviews :  {{value.no_of_sentences}}
                         </h3> 
@@ -43,18 +44,18 @@
                            Sentiment : {{ value.sentiment }}
                         </h3> 
                         
-                        <ul>
-                        {% for id in value.sentence_ids %}
-                        <!-- <li> id is :  {{ id }} </li> -->
-                        <!-- <li> testing : {{sentences|get_from_dict:id}} </li> -->
-                        {% with sentences|get_from_dict:id as dict %}
-
-                        <li>  Review  {{ id }}  :   {{dict.sentence_text }} </li>
-                        </ul>
+                         {% for id in value.sentence_ids %}
+                            <ul>
+                               
+                                <!-- <li> id is :  {{ id }} </li> -->
+                                <!-- <li> testing : {{sentences|get_from_dict:id}} </li> -->
+                                {% with sentences|get_from_dict:id as dict %}
+                                <li>  Review  {{ id }}  :   {{dict.sentence_text }} </li>
+                            </ul>
                         {% endwith %}
                         {% endfor %}
 
-                    <p class="post-meta">Posted  on {{ value.time }}</p>
+                    
                 </div>
                 <hr>
              {% endfor%}   

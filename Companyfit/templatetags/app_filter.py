@@ -18,7 +18,10 @@ def get_sentiment(sentiment):
 
 @register.filter(name="date_filter")
 def get_date(date):
-	date = str(date)
+	date = str(date) 
+
+	if(len(date)==0):
+		return "Not Specified"
 	x = DateTime(date)
 	new_date = ""
 	new_date += x.Day() + '  ' + str(x.day()) + '  ' + x.Month()  + '  ' + str(x.year())
