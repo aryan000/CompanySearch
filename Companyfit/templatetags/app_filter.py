@@ -10,10 +10,25 @@ def keyvalue(dict, key):
 
 @register.filter(name ="sentiment_filter")
 def get_sentiment(sentiment):
-	sentiment = str(sentiment)
-	options = { '-2' : 'Very Negative ' , '-1' : 'Negative ' , '0' : 'Neutral' , '1' : 'Positive ' , '2' : 'Very Positive' }
-	# print("present sentiment is : " + sentiment + " and returning " + options[sentiment])
-	return options[sentiment]	
+	sentiment = float(sentiment)
+	print(sentiment)
+	if (sentiment >= float(-1) and sentiment < float(-0.5)) : 
+		return 'Very Negative ' 
+	if (sentiment >= float(-0.5) and sentiment <float(0)):
+		return 'Negative ' 
+	
+	if (sentiment == float(0) ): 
+		return 'Neutral' 
+	
+	if sentiment >= float(0) and sentiment < float(0.5):
+		return 'Positive' 
+	
+	if sentiment >= float(0.5) and sentiment <= float(1):
+		return 'Very Positive' 
+	
+	return sentiment	
+
+		
 
 
 @register.filter(name="date_filter")
@@ -25,7 +40,7 @@ def get_date(date):
 	x = DateTime(date)
 	new_date = ""
 	new_date += x.Day() + '  ' + str(x.day()) + '  ' + x.Month()  + '  ' + str(x.year())
-	print("new date is : " + str(new_date))
+	# print("new date is : " + str(new_date))
 	return new_date
 
 

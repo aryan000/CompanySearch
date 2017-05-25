@@ -3,7 +3,7 @@
 {% load app_filter %}
 {% load staticfiles %}
 
-
+<link rel="stylesheet" href="/static/css/w3.css">
 </div>
     <!-- Main Content -->
     <div class="container">
@@ -27,21 +27,28 @@
            
             </div> -->
 
-        <div class="row">
+        <div class="row" >
             <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0">
-
+              
             {% for key , value in feature_json.items %}
-                <div class="post-preview">
+
+            <!-- <div class="w3-panel w3-border w3-border-black"> -->
+                <!-- <div class="w3-panel w3-leftbar w3-sand w3-xxlarge w3-serif"> -->
+                <div class="w3-panel w3-border w3-pale-grey w3-border-blue">
+                <div class="panel-body">
                    
-                        <h2 class="post-title">
-                            Feature name : {{ key }}
-                        </h2>
+                        <!-- <h2 class="post-title">
+                            Feature name : {{ key|caps_filter }}
+                        </h2> -->
+                         <div class="w3-panel w3-leftbar w3-sand w3-xxlarge w3-serif">
+                            <p><i> Feature name : {{ key|caps_filter }}</i></p>
+                          </div>
                    
                         <h3 class="post-subtitle">
                            Number of Reviews :  {{value.no_of_sentences}}
                         </h3> 
                         <h3 class="post-subtitle">
-                           Sentiment : {{ value.sentiment }}
+                           Sentiment : {{ value.sentiment|sentiment_filter }}
                         </h3> 
                         
                          {% for id in value.sentence_ids %}
@@ -55,7 +62,7 @@
                         {% endwith %}
                         {% endfor %}
 
-                    
+                    </div>
                 </div>
                 <hr>
              {% endfor%}   
