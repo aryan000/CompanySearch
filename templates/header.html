@@ -1,4 +1,4 @@
-
+{% load app_filter %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,10 +48,10 @@
                         <a href="{% url 'feature' name %} ">Feature</a>
                     </li>
                     <li>
-                        <a href="{% url 'index' %}">Graph View</a>
+                        <a href="{% url 'chart' name %}">Graph View</a>
                     </li>
                     <li>
-                        <a href="{% url 'index' %}">Contact</a>
+                        <a href="{% url 'simple_chart' name %}">Simple Chart</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +69,7 @@
                     <div class="site-heading">
                         <h1>{{ name }} </h1>
                         <hr class="small">
-                        <span class="subheading">{{ industryName }}</span>
+                        <span class="subheading">{{ industryName|remove_and }}</span>
                     </div>
                 </div>
             </div>

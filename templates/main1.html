@@ -6,7 +6,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class = "row" > 
-            <label> Industry Name : {{ industryName }} </label> <br>
+            <label> Industry Name : {{ industryName|remove_and }} </label> <br>
             <label> Sector Name : {{ sectorName }} </label> <br>
             <label> Reviews : Total {{ no_of_sentences }} Reviews</label>  <br>
              <table> 
@@ -31,7 +31,7 @@
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            {{ value.sentence_text}}
+                            {{ value.sentence_text|remove_quotes}}
                         </h2>
                         <h3 class="post-subtitle">
                            Sentiment :  {{ value.sentiment|sentiment_filter  }}

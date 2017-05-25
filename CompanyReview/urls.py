@@ -7,6 +7,8 @@ urlpatterns = [
 	# url(r'^home/$', views.home, name = 'home'),
 	url(r'^company_search/$', views.company_search, name = 'comapny_search') ,
 	url(r'^main/$' , views.main , name = "main")  ,
-	url(r'^feature/(?P<company_name>[-\w]+)/$', views.feature , name = "feature") 
+	url(r'^feature/(?P<company_name>[-\w]+)/$', views.feature , name = "feature") ,
+	url(r'^chart/(?P<company_name>[-\w]+)/$' , views.chart , name = "chart"),
+	url(r'^simple_chart/(?P<company_name>[-\w]+)/$' , views.simple_chart , name = "simple_chart")
 	
 ]

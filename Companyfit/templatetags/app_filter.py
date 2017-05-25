@@ -1,6 +1,7 @@
 from django  import template
 from DateTime import DateTime
 import string 
+import re
 register = template.Library()
 
 @register.filter (name = "get_from_dict")
@@ -27,4 +28,17 @@ def get_date(date):
 
 @register.filter(name = "caps_filter")
 def get_caps(word):
-	return string.capwords(word)
+	return string.capwords(word) 
+
+
+@register.filter(name = "remove_quotes")
+def remove_quote(word):
+	s = re.sub(r'^"*|"*$', '', word)
+	return s
+
+
+@register.filter(name = "remove_and")
+def remove_and(word):
+	s = re.sub(r'&amp;','&', word)
+	return s
+

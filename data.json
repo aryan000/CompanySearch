@@ -1,0 +1,13 @@
+{   
+   "yearlydata"  : {
+	   	"1 Feb 2014 to 31 July 2014": 	{"sentence_id": ["973", "1251", "1232"], "sentiment": 3}, 
+		 "1 Aug 2013 to 31 Jan 2014": {"sentence_id": ["764", "1", "945"], "sentiment": 3}, 
+		 "1 Feb 2015 to 31 July 2015": {"sentence_id": ["2061", "1698", "1952"], "sentiment": 3}, 
+		 "1 Aug 2014 to 31 Jan 2015": {"sentence_id": ["1344", "1346", "1596", "1613", "1343", "1622"], "sentiment": 6}, 
+		 "1 Feb 2017 to 31 July 2017": {"sentence_id": ["5539"], "sentiment": 1}, 
+		 "1 Feb 2016 to 31 July 2016": {"sentence_id": ["3624", "2873", "3538"], "sentiment": 3}, 
+		 "1 Aug 2016 to 31 Jan 2017": {"sentence_id": ["4674", "3762", "4607", "3759", "4686", "4523"], "sentiment": 6}, 
+		 "1 Aug 2015 to 31 Jan 2016": {"sentence_id": ["2218", "2758", "2763", "2214", "2182"], "sentiment": 5}
+
+		}
+}	
