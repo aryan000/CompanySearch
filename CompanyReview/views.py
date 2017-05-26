@@ -25,7 +25,7 @@ def main(request):
         company_name = request.GET['company_name']
 
         if company_name.lower() == 'amazon':
-            with open('amazon.json' , 'r') as f:
+            with open('amazon1.json' , 'r',encoding="utf8") as f:
                 data = json.load(f)
             return render(request , 'main1.html',data)
         else : 
