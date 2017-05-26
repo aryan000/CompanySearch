@@ -25,7 +25,7 @@ def main(request):
         company_name = request.GET['company_name']
 
         if company_name.lower() == 'amazon':
-            with open('amazon1.json' , 'r',encoding="utf8") as f:
+            with open('amazon.json' , 'r',encoding="utf8") as f:
                 data = json.load(f)
             return render(request , 'main1.html',data)
         else : 
@@ -58,14 +58,14 @@ def reviews(request, company_name):
 
 
 def feature(request,company_name):
-    with open( company_name.lower() + '.json' , 'r') as f:
+    with open( company_name.lower() + '.json' , 'r' ,encoding="utf8") as f:
             data = json.load(f)
     return render(request , 'feature.html',data)
 
 
     print ("\n\n\n\ncompany name is : " + company_name)
     # company_name = request.GET['company_name']
-    with open('company_dict1.json' , 'r') as f:
+    with open('company_dict1.json' , 'r' , encoding="utf8") as f:
         data = json.load(f)
     return render(request , 'feature.html',data)
 
@@ -76,7 +76,7 @@ def feature(request,company_name):
 def chart(request,company_name):
     print ("company name is : " + company_name)
     # company_name = request.GET['company_name']
-    with open('data.json' , 'r') as f:
+    with open('data.json' , 'r' , encoding="utf8") as f:
         data = json.load(f)
         data['name' ] = company_name
 
@@ -90,7 +90,7 @@ def simple_chart(request,company_name):
     # with open('data.json' , 'r') as f:
     #     data = json.load(f)
 
-    with open( company_name.lower() + '.json' , 'r') as f:
+    with open( company_name.lower() + '.json' , 'r' , encoding="utf8") as f:
             data = json.load(f)
     data['name' ] = company_name
     print("\n\n printing \n\n ")

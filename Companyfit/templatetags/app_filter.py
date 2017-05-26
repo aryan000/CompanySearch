@@ -5,8 +5,12 @@ import re
 register = template.Library()
 
 @register.filter (name = "get_from_dict")
-def keyvalue(dict, key):    
-    return dict[key] 
+def keyvalue(dict, key): 
+	try : 
+		# print ( str(dict))
+		return dict[key] 
+	except KeyError : 
+		return 'None'
 
 @register.filter(name ="sentiment_filter")
 def get_sentiment(sentiment):
@@ -59,4 +63,12 @@ def remove_quote(word):
 def remove_and(word):
 	s = re.sub(r'&amp;','&', word)
 	return s
+
+@register.filter(name = "print_dict")
+def print_dict(word):
+	
+	for x in word.keys():
+		print (x)
+
+	return word.keys()
 
