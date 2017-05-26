@@ -29,25 +29,25 @@ def main(request):
                 data = json.load(f)
             return render(request , 'main1.html',data)
         else : 
-            with open('company_dict1.json' , 'r') as f:
+            with open('company_dict1.json' , 'r',encoding="utf8") as f:
                 data = json.load(f)
             return render(request , 'main1.html',data)
 
     return render(request,'navbar.html')
 
 def main1(request, company_name):
-    with open( company_name.lower() + '.json' , 'r') as f:
+    with open( company_name.lower() + '.json' , 'r',encoding="utf8") as f:
             data = json.load(f)
     return render(request , 'main1.html',data)
 
 
 def reviews(request, company_name):
 
-    with open( company_name.lower() + '.json' , 'r') as f:
+    with open( company_name.lower() + '.json' , 'r',encoding="utf8") as f:
             data = json.load(f)
     return render(request , 'reviews.html',data)
 
-    with open('company_dict1.json' , 'r') as f:
+    with open('company_dict1.json' , 'r',encoding="utf8") as f:
             data = json.load(f)
     return render(request , 'reviews.html',data)
 
