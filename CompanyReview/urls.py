@@ -11,6 +11,7 @@ urlpatterns = [
 	url(r'^feature_wise_chart/(?P<company_name>[-\w]+)/(?P<feature_name>[-\w]+)/$' , views.feature_wise_chart , name = "feature_wise_chart"),
 	url(r'^main/(?P<company_name>[-\w]+)/$' , views.main1, name = "main1"),
 	url(r'^reviews/(?P<company_name>[-\w]+)/$' , views.reviews, name = "reviews"),
+	url(r'^reviews_test/(?P<company_name>[-\w]+)/$' , views.reviews_test, name = "reviews_test"),
 	url(r'^specify_sentiment/(?P<company_name>[-\w]+)/(?P<sentiment_name>[-\w]+)/$' , views.specify_sentiment, name = "specify_sentiment")
 	
 ]

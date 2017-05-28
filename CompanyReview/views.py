@@ -54,7 +54,74 @@ def reviews(request, company_name):
 
     with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
             data = json.load(f)
-    return render(request , 'reviews.html',data)
+    return render(request , 'reviews.html',data) 
+
+
+
+
+def reviews_test(request, company_name):
+
+    with open( company_name.lower() + '.json' , 'r',encoding  = 'utf-8') as f:
+        data = json.load(f)
+
+    if 'page' in request.GET : 
+        page_no = request.GET['page'] 
+    else:
+        page_no = '1'
+
+    print("i am here")
+    for x in data['sentences'].items():
+        print(x)
+        break;
+    
+    t = tuple(data['sentences'].items())
+    print("page inumber is : " + page_no)
+    print(type(page_no))
+    paginator = Paginator(t, 10)
+
+    # return render(request , 'feature_test.html',data)
+    try:
+        users = paginator.page(int(page_no))
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+    data = {}
+    data['name'] = company_name
+    temp_data = {}
+    for x in users:
+        print (x[0])
+        temp_data[x[0]] = x[1]
+
+    data['sentences'] = temp_data
+    data['users'] = users
+
+
+    index = int(page_no) - 1
+    max_index = len(paginator.page_range) 
+    print(index)
+    if (index >=9) :
+        start_index = index - 9
+    else  : 
+        start_index = 0
+    end_index = index + 9 if index <= max_index - 9 else max_index
+
+    page_range = paginator.page_range[start_index:end_index]
+
+    data['page_range'] = page_range
+     
+    print( "range is : " + str(start_index ) + " and " + str(end_index))
+
+
+    return render(request, 'reviews_test.html' , data )
+
+
+    print ("\n\n\n\ncompany name is : " + company_name)
+    # company_name = request.GET['company_name']
+    with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
+        data = json.load(f)
+    return render(request , 'feature_test.html',data)
+
 
 
 
@@ -89,9 +156,7 @@ def chart(request,company_name):
     print (data)
     return render(request,'charts.html', data)
 
-
-
-    
+  
 def simple_chart(request,company_name):
     # with open('data.json' , 'r',encoding  = 'utf-8') as f:
     #     data = json.load(f)
@@ -224,8 +289,6 @@ def feature_wise_chart(request, company_name, feature_name):
     response=django.http.HttpResponse(content_type='image/png')
     canvas.print_png(response)
     return response
-
-
 
 
 
