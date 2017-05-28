@@ -6,12 +6,11 @@ import os
 import random
 import django
 import datetime
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.dates import DateFormatter,datestr2num
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 def index(request) : 
     return render(request, 'index.html')
@@ -33,6 +32,10 @@ def main(request):
             with open('adobe.json' , 'r',encoding  = 'utf-8') as f:
                 data = json.load(f)
             return render(request , 'main1.html',data)
+        if company_name.lower() == 'google':
+            with open('google.json' , 'r',encoding  = 'utf-8') as f:
+                data = json.load(f)
+            return render(request , 'main1.html',data)
         else : 
             with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
                 data = json.load(f)
@@ -50,31 +53,34 @@ def reviews(request, company_name):
 
     with open( company_name.lower() + '.json' , 'r',encoding  = 'utf-8') as f:
             data = json.load(f)
-    return render(request , 'reviews.html',data)
+    #return render(request , 'reviews.html',data)
 
-    with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
-            data = json.load(f)
-    return render(request , 'reviews.html',data) 
-
-
-
-
-def reviews_test(request, company_name):
-
-    with open( company_name.lower() + '.json' , 'r',encoding  = 'utf-8') as f:
-        data = json.load(f)
 
     if 'page' in request.GET : 
         page_no = request.GET['page'] 
     else:
         page_no = '1'
 
-    print("i am here")
-    for x in data['sentences'].items():
-        print(x)
-        break;
     
-    t = tuple(data['sentences'].items())
+
+
+    temp_data = data['sentences']
+    dict = {}
+    for key ,value in temp_data.items() : 
+        dict[key] = value['time']
+    ordered = sorted(dict.items(), key=lambda t: t[1] , reverse = True)
+    print("i am here")
+    # print(ordered)
+    new_data = {}
+    for key , value in ordered:
+        print (key + str(temp_data[key]))
+        new_data[key] = temp_data[key]
+
+
+
+
+    # print(new_data)
+    t = tuple(new_data.items())
     print("page inumber is : " + page_no)
     print(type(page_no))
     paginator = Paginator(t, 10)
@@ -113,15 +119,12 @@ def reviews_test(request, company_name):
     print( "range is : " + str(start_index ) + " and " + str(end_index))
 
 
-    return render(request, 'reviews_test.html' , data )
+    return render(request, 'reviews.html' , data )
 
 
-    print ("\n\n\n\ncompany name is : " + company_name)
-    # company_name = request.GET['company_name']
     with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
-        data = json.load(f)
-    return render(request , 'feature_test.html',data)
-
+            data = json.load(f)
+    return render(request , 'reviews.html',data)
 
 
 
@@ -156,7 +159,9 @@ def chart(request,company_name):
     print (data)
     return render(request,'charts.html', data)
 
-  
+
+
+    
 def simple_chart(request,company_name):
     # with open('data.json' , 'r',encoding  = 'utf-8') as f:
     #     data = json.load(f)
@@ -289,65 +294,3 @@ def feature_wise_chart(request, company_name, feature_name):
     response=django.http.HttpResponse(content_type='image/png')
     canvas.print_png(response)
     return response
-
-
-
-def feature_test(request,company_name ):
-    with open( company_name.lower() + '.json' , 'r',encoding  = 'utf-8') as f:
-            data = json.load(f)
-
-    
-    if 'page' in request.GET : 
-        page_no = request.GET['page'] 
-    else:
-        page_no = '1'
-
-    print(page_no)
-
-
-    t = tuple(data['feature_json'].items())
-    print("page inumber is : " + page_no)
-    print(type(page_no))
-    paginator = Paginator(t, 10)
-    # return render(request , 'feature_test.html',data)
-    try:
-        users = paginator.page(int(page_no))
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
-    data = {}
-    data['name'] = company_name
-    temp_data = {}
-    for x in users:
-        # print (x)
-        temp_data[x[0]] = x[1]
-
-    data['feature_json'] = temp_data
-    data['users'] = users
-
-
-    index = int(page_no) - 1
-    max_index = len(paginator.page_range) 
-    print(index)
-    if (index >=9) :
-        start_index = index - 9
-    else  : 
-        start_index = 0
-    end_index = index + 9 if index <= max_index - 9 else max_index
-
-    page_range = paginator.page_range[start_index:end_index]
-
-    data['page_range'] = page_range
-     
-    print( "range is : " + str(start_index ) + " and " + str(end_index))
-
-
-    return render(request, 'feature_test.html' , data )
-
-
-    print ("\n\n\n\ncompany name is : " + company_name)
-    # company_name = request.GET['company_name']
-    with open('company_dict1.json' , 'r',encoding  = 'utf-8') as f:
-        data = json.load(f)
-    return render(request , 'feature_test.html',data)

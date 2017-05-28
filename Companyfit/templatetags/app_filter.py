@@ -5,15 +5,13 @@ import re
 register = template.Library()
 
 @register.filter (name = "get_from_dict")
-def keyvalue(dict, key):
-    # print(type(key))
-    # print(dict)
+def keyvalue(dict, key):    
     return dict[key] 
 
 @register.filter(name ="sentiment_filter")
 def get_sentiment(sentiment):
 	sentiment = float(sentiment)
-	# print(sentiment)
+	print(sentiment)
 
 	if(sentiment < float(-1)):
 		return 'Very Negative'
@@ -67,15 +65,15 @@ def get_caps(word):
 
 @register.filter(name = "replace_punctuation")
 def replace_punctuation(url_text):
-	# print('\n\n')
+	print('\n\n')
 	exclude = set(string.punctuation)
 	filtered_url = ''.join(ch for ch in url_text if ch not in exclude)
 	#return str(word.replace(' ','_').replace('/','_').replace('.','_').replace(':','_').replace('|','_'))
 	filtered_url = filtered_url.replace('...',' ')
 	filtered_url = filtered_url.replace(' ','_')
-	# print("\n\n\n")
-	# print("filtered url")
-	# print(filtered_url.encode('utf-8'))
+	print("\n\n\n")
+	print("filtered url")
+	print(filtered_url.encode('utf-8'))
 	filtered_url = filtered_url.replace('\'','_')
 
 	if filtered_url == '':
@@ -89,11 +87,11 @@ def remove_quote(word):
 
 @register.filter(name = "debug1")
 def debug1(dict):
-	# print('\n\nDebugging dict\n')
+	print('\n\nDebugging dict\n')
 	#print(dict)
-	# for key,value in dict.items():
-		# print(key.encode('utf-8'))
-		# print('\n')
+	for key,value in dict.items():
+		print(key.encode('utf-8'))
+		print('\n')
 	return dict
 
 
