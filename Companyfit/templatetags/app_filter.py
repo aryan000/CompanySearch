@@ -5,21 +5,24 @@ import re
 register = template.Library()
 
 @register.filter (name = "get_from_dict")
-def keyvalue(dict, key): 
-	try : 
-		# print ( str(dict))
-		return dict[key] 
-	except KeyError : 
-		return 'None'
+def keyvalue(dict, key):
+    # print(type(key))
+    # print(dict)
+    return dict[key] 
 
 @register.filter(name ="sentiment_filter")
 def get_sentiment(sentiment):
 	sentiment = float(sentiment)
-	print(sentiment)
+	# print(sentiment)
+
+	if(sentiment < float(-1)):
+		return 'Very Negative'
+
 	if (sentiment >= float(-1) and sentiment < float(-0.5)) : 
-		return 'Very Negative ' 
+		return 'Very Negative' 
+
 	if (sentiment >= float(-0.5) and sentiment <float(0)):
-		return 'Negative ' 
+		return 'Negative' 
 	
 	if (sentiment == float(0) ): 
 		return 'Neutral' 
@@ -29,6 +32,9 @@ def get_sentiment(sentiment):
 	
 	if sentiment >= float(0.5) and sentiment <= float(1):
 		return 'Very Positive' 
+
+	if(sentiment > float(+1)):
+		return 'Very Positive'
 	
 	return sentiment	
 
@@ -48,27 +54,51 @@ def get_date(date):
 	return new_date
 
 
+@register.filter(name="find_one_percent")
+def find_one_percent(no_of_sentences):
+	
+	return(no_of_sentences*0.01)
+
+
+
 @register.filter(name = "caps_filter")
 def get_caps(word):
 	return string.capwords(word) 
 
+@register.filter(name = "replace_punctuation")
+def replace_punctuation(url_text):
+	# print('\n\n')
+	exclude = set(string.punctuation)
+	filtered_url = ''.join(ch for ch in url_text if ch not in exclude)
+	#return str(word.replace(' ','_').replace('/','_').replace('.','_').replace(':','_').replace('|','_'))
+	filtered_url = filtered_url.replace('...',' ')
+	filtered_url = filtered_url.replace(' ','_')
+	# print("\n\n\n")
+	# print("filtered url")
+	# print(filtered_url.encode('utf-8'))
+	filtered_url = filtered_url.replace('\'','_')
+
+	if filtered_url == '':
+		filtered_url = '_'
+	return str(filtered_url)
 
 @register.filter(name = "remove_quotes")
 def remove_quote(word):
 	s = re.sub(r'^"*|"*$', '', word)
 	return s
 
+@register.filter(name = "debug1")
+def debug1(dict):
+	# print('\n\nDebugging dict\n')
+	#print(dict)
+	# for key,value in dict.items():
+		# print(key.encode('utf-8'))
+		# print('\n')
+	return dict
+
 
 @register.filter(name = "remove_and")
 def remove_and(word):
 	s = re.sub(r'&amp;','&', word)
 	return s
-
-@register.filter(name = "print_dict")
-def print_dict(word):
-	
-	for x in word.keys():
-		print (x)
-
-	return word.keys()
 

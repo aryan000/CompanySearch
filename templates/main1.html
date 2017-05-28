@@ -6,8 +6,13 @@
     <!-- Main Content -->
     <div class="container">
         <div class = "row" > 
+            <label> Company Name : {{ name }} </label> <br>
+            {% if industryName %}
             <label> Industry Name : {{ industryName|remove_and }} </label> <br>
+            {% endif %}
+            {% if sectorName %}
             <label> Sector Name : {{ sectorName }} </label> <br>
+            {% endif %}
             <label> Reviews : Total {{ no_of_sentences }} Reviews</label>  <br>
              <table> 
                 <tr> 
