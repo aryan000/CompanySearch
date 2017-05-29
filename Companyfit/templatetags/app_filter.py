@@ -2,16 +2,58 @@ from django  import template
 from DateTime import DateTime
 import string 
 import re
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from string import ascii_letters
 register = template.Library()
 
 @register.filter (name = "get_from_dict")
 def keyvalue(dict, key):    
     return dict[key] 
 
+
+
+@register.filter(name = "get_top_5")
+def get_top_5(data):
+
+	if(len(data)<5):
+		return data
+	paginator = Paginator(data, 5)
+	try:
+		users = paginator.page(1)
+	except PageNotAnInteger:
+		users = paginator.page(1)
+	except EmptyPage:
+		users = paginator.page(paginator.num_pages)
+
+	temp_data = []
+	for  x in users : 
+		print(" user id is : " + x + "totalusers is : " + str(len(users)))
+		temp_data.append(x)
+
+	t_data = {}
+	t_data['id'] = temp_data
+	t_data['users'] = users
+
+	print(t_data)
+	return t_data
+
+
+@register.filter (name = "check_for_url")
+def keyvalue(feature_name):   
+	# valid = re.match('^[\w-]+$', feature_name) is not None
+	# print(valid)
+	# return(valid)
+
+	if all(c in ascii_letters+'-'+' ' for c in feature_name):
+		return(True)
+	else:
+		return(False)
+
 @register.filter(name ="sentiment_filter")
 def get_sentiment(sentiment):
 	sentiment = float(sentiment)
-	print(sentiment)
+	# print(sentiment)
 
 	if(sentiment < float(-1)):
 		return 'Very Negative'
@@ -65,15 +107,15 @@ def get_caps(word):
 
 @register.filter(name = "replace_punctuation")
 def replace_punctuation(url_text):
-	print('\n\n')
+	# print('\n\n')
 	exclude = set(string.punctuation)
 	filtered_url = ''.join(ch for ch in url_text if ch not in exclude)
 	#return str(word.replace(' ','_').replace('/','_').replace('.','_').replace(':','_').replace('|','_'))
 	filtered_url = filtered_url.replace('...',' ')
 	filtered_url = filtered_url.replace(' ','_')
-	print("\n\n\n")
-	print("filtered url")
-	print(filtered_url.encode('utf-8'))
+	# print("\n\n\n")
+	# print("filtered url")
+	# print(filtered_url.encode('utf-8'))
 	filtered_url = filtered_url.replace('\'','_')
 
 	if filtered_url == '':
@@ -87,11 +129,11 @@ def remove_quote(word):
 
 @register.filter(name = "debug1")
 def debug1(dict):
-	print('\n\nDebugging dict\n')
+	# print('\n\nDebugging dict\n')
 	#print(dict)
-	for key,value in dict.items():
-		print(key.encode('utf-8'))
-		print('\n')
+	# for key,value in dict.items():
+		# print(key.encode('utf-8'))
+		# print('\n')
 	return dict
 
 
